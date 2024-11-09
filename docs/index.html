@@ -21,19 +21,25 @@
             margin: auto;
         }
         .info-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             margin-top: 10px;
         }
+        .contact-info, .gallery-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
         .gallery-link {
-            display: inline-block;
-            padding: 5px 15px;
+            margin-top: 10px;
+            padding: 10px 15px;
             background-color: #3498db;
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-size: 14px;
+            width: fit-content;
         }
         .gallery-link:hover {
             background-color: #2980b9;
@@ -41,18 +47,33 @@
         ul {
             padding-left: 20px;
         }
+        .icon {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
     <h1>Luxurious 4.5 BHK Triplex Villa for Rent in Citrus Springvillae, HSR Extension</h1>
     <div class="description">
-        <div class="info-header">
-            <p><strong>🌟 NO BROKERAGE | IMMEDIATE MOVE-IN 🌟</strong></p>
-            <a href="pics/index.html" class="gallery-link">View Image Gallery</a>
+        <p class="info-header"><strong>🌟 NO BROKERAGE | IMMEDIATE MOVE-IN 🌟</strong></p>
+        
+        <!-- Contact Info with Icons -->
+        <div class="contact-info">
+            <img src="https://img.icons8.com/ios-glyphs/30/google-maps-new.png" class="icon" alt="Map Icon">
+            <p><strong>Maps:</strong> <a href="https://maps.app.goo.gl/w3V2k4t4buBz1rqB9" target="_blank">Click here for location</a></p>
         </div>
         
-        <p><strong>Maps:</strong> <a href="https://maps.app.goo.gl/w3V2k4t4buBz1rqB9" target="_blank">Click here for location</a></p>
-        <p><strong>Mobile/Whatsapp:</strong> 6369429061</p>
+        <div class="contact-info">
+            <img src="https://img.icons8.com/ios-filled/50/whatsapp.png" class="icon" alt="WhatsApp Icon">
+            <img src="https://img.icons8.com/ios-glyphs/30/phone.png" class="icon" alt="Phone Icon">
+            <p><strong>Mobile/WhatsApp:</strong> 6369429061</p>
+        </div>
+        
+        <!-- Gallery Link Button -->
+        <a href="pics/index.html" class="gallery-link">View Image Gallery</a>
+        
         <p>Welcome to your dream home—a stunning corner villa with elegant vintage charm, nestled in the heart of Citrus Springvillae on Harlur Road. This 3200 sqft luxury villa boasts a Georgian-era English county aesthetic, offering both modern comforts and a timeless design. Freshly painted and fully furnished, it's the perfect blend of style, space, and sophistication!</p>
 
         <h2>Key Features:</h2>

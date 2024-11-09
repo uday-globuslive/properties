@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        .description {
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        /* Lightbox (Modal) styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+        }
+        .lightbox:target {
+            display: flex;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Villa Gallery</h1>
+    <p class="description">Explore a collection of images showcasing the beauty and elegance of my villa. From stunning architecture to lush landscapes, experience the unique charm of my villa through this gallery.</p>
+    <div class="gallery" id="gallery"></div>
+
+    <!-- Lightbox Container -->
+    <div id="lightbox" class="lightbox">
+        <a href="#" class="lightbox-close">&times;</a>
+        <img id="lightbox-img" src="" alt="Villa Image">
+    </div>
+
+    <script>
+        const galleryDiv = document.getElementById('gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        const apiURL = 'https://api.github.com/repos/uday-globuslive/properties/contents/images/villa';
+
+        fetch(apiURL)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(file => {
+                    if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                        const img = document.createElement('img');
+                        img.src = file.download_url;
+                        img.alt = `Villa Image`;
+                        img.addEventListener('click', () => {
+                            lightbox.style.display = 'flex';
+                            lightboxImg.src = file.download_url;
+                        });
+                        galleryDiv.appendChild(img);
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching images:", error));
+
+        // Close the lightbox when clicking outside the image or on the close button
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox || event.target.classList.contains('lightbox-close')) {
+                lightbox.style.display = 'none';
+                lightboxImg.src = '';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -38,12 +38,28 @@
 <body>
     <h1>Welcome to My Villa Gallery</h1>
     <p class="description">Explore a collection of images showcasing the beauty and elegance of my villa. From stunning architecture to lush landscapes, experience the unique charm of my villa through this gallery.</p>
-    <div class="gallery">
-        <!-- Add your images here -->
-        <img src="images/villa/image1.jpg" alt="Villa Image 1">
-        <img src="images/villa/image2.jpg" alt="Villa Image 2">
-        <img src="images/villa/image3.jpg" alt="Villa Image 3">
-        <!-- Repeat for each image -->
-    </div>
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        const galleryDiv = document.getElementById('gallery');
+
+        // GitHub API URL for accessing files in the `images/villa` folder
+        const apiURL = 'https://api.github.com/repos/<your-username>/<repository-name>/contents/images/villa';
+
+        // Fetch folder contents from GitHub API
+        fetch(apiURL)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(file => {
+                    if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                        const img = document.createElement('img');
+                        img.src = file.download_url;  // Direct link to the image
+                        img.alt = `Villa Image`;
+                        galleryDiv.appendChild(img);
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching images:", error));
+    </script>
 </body>
 </html>

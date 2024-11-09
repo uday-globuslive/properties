@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        .description {
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Villa Gallery</h1>
+    <p class="description">Explore a collection of images showcasing the beauty and elegance of my villa. From stunning architecture to lush landscapes, experience the unique charm of my villa through this gallery.</p>
+    <div class="gallery">
+        <!-- Add your images here -->
+        <img src="images/villa/image1.jpg" alt="Villa Image 1">
+        <img src="images/villa/image2.jpg" alt="Villa Image 2">
+        <img src="images/villa/image3.jpg" alt="Villa Image 3">
+        <!-- Repeat for each image -->
+    </div>
+</body>
+</html>

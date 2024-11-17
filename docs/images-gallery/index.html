@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        .gallery img:hover {
+            border-color: #666;
+        }
+        .image-container {
+            width: 200px;
+        }
+        @media (max-width: 600px) {
+            .image-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Image Gallery</h1>
+    <div id="gallery" class="gallery"></div>
+
+    <script>
+        // GitHub API URL for the repository's Images_Before_handover_16thNov folder
+        const apiUrl = "https://api.github.com/repos/uday-globuslive/properties/contents/Images_Before_handover_16thNov";
+
+        // Function to fetch and display images
+        async function loadImages() {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error("Failed to fetch image list");
+
+                const files = await response.json();
+                const gallery = document.getElementById("gallery");
+
+                files.forEach(file => {
+                    if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                        const img = document.createElement("img");
+                        img.src = file.download_url;
+                        img.alt = file.name;
+                        img.loading = "lazy";
+
+                        const container = document.createElement("div");
+                        container.className = "image-container";
+                        container.appendChild(img);
+
+                        gallery.appendChild(container);
+                    }
+                });
+            } catch (error) {
+                console.error("Error loading images:", error);
+            }
+        }
+
+        // Load images on page load
+        loadImages();
+    </script>
+</body>
+</html>
